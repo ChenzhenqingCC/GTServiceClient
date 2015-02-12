@@ -63,7 +63,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\3Part\wtl;..\..\3Part;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\3Part\wtl;..\..\3Part;..\autoupdate\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -99,7 +99,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\3Part\wtl;..\..\3Part;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\3Part\wtl;..\..\3Part;..\autoupdate\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling />
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -128,6 +128,20 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="utility.cpp" />
+    <ClCompile Include="WebDispWindow.cpp" />
+    <ClCompile Include="webui\cppieembed.cpp" />
+    <ClCompile Include="webui\jsobject.cpp" />
+    <ClCompile Include="webui\tdispatch.cpp" />
+    <ClCompile Include="webui\tdochostshowui.cpp" />
+    <ClCompile Include="webui\tdochostuihandler.cpp" />
+    <ClCompile Include="webui\toleclientsite.cpp" />
+    <ClCompile Include="webui\toleinplaceframe.cpp" />
+    <ClCompile Include="webui\toleinplacesite.cpp" />
+    <ClCompile Include="webui\urlcode.cpp" />
+    <ClCompile Include="webui\webform.cpp" />
+    <ClCompile Include="webui\webformdispatchhandler.cpp" />
+    <ClCompile Include="webui\webformdispatchimpl.cpp" />
+    <ClCompile Include="webui\webwindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="collectwork.h" />
@@ -136,6 +150,19 @@
     <ClInclude Include="sgtservice.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="utility.h" />
+    <ClInclude Include="WebDispWindow.h" />
+    <ClInclude Include="webui\jsobject.h" />
+    <ClInclude Include="webui\tdispatch.h" />
+    <ClInclude Include="webui\tdochostshowui.h" />
+    <ClInclude Include="webui\tdochostuihandler.h" />
+    <ClInclude Include="webui\toleclientsite.h" />
+    <ClInclude Include="webui\toleinplaceframe.h" />
+    <ClInclude Include="webui\toleinplacesite.h" />
+    <ClInclude Include="webui\urlcode.h" />
+    <ClInclude Include="webui\webform.h" />
+    <ClInclude Include="webui\webformdispatchhandler.h" />
+    <ClInclude Include="webui\webformdispatchimpl.h" />
+    <ClInclude Include="webui\webwindow.h" />
     <ClInclude Include="workitem.h" />
   </ItemGroup>
   <ItemGroup>

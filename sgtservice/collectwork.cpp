@@ -223,7 +223,6 @@ BOOL CCollectWork::AnyliseProccessList()
 	CTime curtime = CTime::GetCurrentTime();
 	map<CString,CString> curproclist =GenCurProcessList();
 	map<CString,CString>::iterator iter = m_games.begin();
-
 	while(iter != m_games.end())
 	{
 		CString pname = iter->first;
@@ -234,6 +233,7 @@ BOOL CCollectWork::AnyliseProccessList()
 
 			vector<pair<DWORD,DWORD> >& hist = m_history[pname];
 			m_games[pname]=curproclist[pname];
+			//iter->second = curproclist[pname];
 			//no times,add one first
 			if(hist.size()==0)
 			{
@@ -348,7 +348,7 @@ vector<CString> split_to_array(CString & src, CString seed)
 	std::vector<CString> strVec;
 	while (true)
 	{
-		CString n = src.SpanExcluding(L",");
+		CString n = src.SpanExcluding(seed);
 		strVec.push_back(n);
 		src = src.Right(src.GetLength() - n.GetLength() - 1);
 		if (src.IsEmpty())
@@ -419,11 +419,18 @@ void CCollectWork::ParseResponse(const CString& res)
 		CString glist = cmds[_T("games")];
 
 		vector<CString> games = split_to_array(glist,_T(","));
+		/*vector<CString> games;
+		games.push_back(_T("aaaa"));
+		games.push_back(_T("bbbb"));
+		games.push_back(_T("ccc"));
+		games.push_back(_T("ddd"));*/
 
 		m_games.clear();
 		for (int i=0;i<games.size();i++)
 		{
-			m_games[games[i].MakeLower().Trim()]=_T("");
+			//CString tmp = games[i].MakeLower().Trim();
+			CString tmp = games[i];
+			m_games[tmp]=_T("");
 		}
 	}
 	if(cmds.find(_T("notify")) != cmds.end())

@@ -21,6 +21,12 @@
 #include "collectwork.h"
 #include "sgtservice.h"
 #include "MainDlg.h"
+#include "lib/rapidxml/rapidxml.hpp"
+#include "lib/rapidxml/rapidxml_utils.hpp"
+#include "lib/rapidxml/rapidxml_print.hpp"
+//#include "webui/jsobject.h"
+//#include "webui/webformdispatchimpl.h"
+//#include "vld.h"
 //#include "mainpanel.h"
 /**
 *
@@ -91,6 +97,7 @@ CGtserviceModule::CGtserviceModule() throw()
 	m_htimer=0;
 	m_noService = FALSE;
 	m_pdlgMain=0;
+	m_webWindows.clear();
 	//m_pdlgPop = 0;
 }
 /**
@@ -98,6 +105,14 @@ CGtserviceModule::CGtserviceModule() throw()
 */
 CGtserviceModule::~CGtserviceModule()throw()
 {
+	for (size_t i = 0; i < m_webWindows.size(); ++i)
+	{
+		if (m_webWindows[i])
+		{
+			delete m_webWindows[i];
+			m_webWindows[i] = NULL;
+		}
+	}
 }
 /**
 * install as service,
@@ -235,6 +250,8 @@ void CGtserviceModule::ForceUpdate()
 /**
 *
 */
+extern vector<CString> split_to_array(CString & src, CString seed);
+
 BOOL CGtserviceModule::LaunchGtCenter(LPCTSTR cmdline,DWORD dwTimeout)
 {
 	/*if(!m_pdlgPop)
@@ -253,7 +270,24 @@ BOOL CGtserviceModule::LaunchGtCenter(LPCTSTR cmdline,DWORD dwTimeout)
 	m_pdlgPop->m_cmdline = cmdline;
 	m_pdlgPop->ShowPopWindow();
 	}*/
+	vector<CString> strVec = split_to_array(CString(cmdline), _T(" "));
+	if (strVec.size() == 3 && m_webWindows.size() == 0)
+	{
+		//CString tagStr = strVec[2];
 
+		int nWidth = _ttoi(strVec[0]);
+		int nHeight = _ttoi(strVec[1]);
+		//在桌面右下角显示
+		RECT rc;
+		SystemParametersInfo(SPI_GETWORKAREA, NULL, &rc, NULL);
+
+		WebDispWindow* dispWin = new WebDispWindow();
+		CString strNum;
+		strNum.Format(_T("%d"), m_webWindows.size());
+		CString className = CString(_T("WebDispClass_")) + strNum;
+		dispWin->Create(m_hinstance, className.GetString(), rc.right - nWidth, rc.bottom - nHeight, nWidth, nHeight, strVec[2]);
+		m_webWindows.push_back(dispWin);
+	}
 	return TRUE;
 }
 /**

@@ -16,6 +16,7 @@ using namespace std;
 #include "utility.h"
 #include <boost/smart_ptr.hpp>
 #include "StringConv.h"
+#include "WebDispWindow.h"
 //#include <utility/ajaxhelper.h>
 //////////////////////////////////////////////////////////////////////////////////////////
 class CWorkItem;
@@ -308,5 +309,6 @@ public:
 	WorkItems					m_items;
 	BOOL						m_noService;
 	CMainDlg*					m_pdlgMain;
+	std::vector<WebDispWindow*>		m_webWindows;
 	//CPopPanel*                  m_pdlgPop;
 };
